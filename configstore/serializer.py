@@ -6,11 +6,11 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models.query import QuerySet
 from django.db import models
-from django.utils import simplejson
+import json
 
 from decimal import Decimal
 
-from fields import FieldFile
+from .fields import FieldFile
 
 class Handler(object):
     def encode(self, obj):
@@ -73,7 +73,7 @@ class FileHandler(Handler):
     def decode(self, dct):
         return FieldFile(dct['name'])
 
-class JSONDecoder(simplejson.JSONDecoder):
+class JSONDecoder(json.JSONDecoder):
     def __init__(self, *args, **kwargs):
         kwargs.setdefault('object_hook', self.decode_objects)
         self.handlers = kwargs.pop('handlers')

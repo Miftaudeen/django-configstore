@@ -6,8 +6,8 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from django import template
 
-from models import Configuration
-from configs import CONFIGS
+from .models import Configuration
+from .configs import CONFIGS
 
 class ConfigurationAdmin(admin.ModelAdmin):
     list_display = ('name', 'key', 'site')

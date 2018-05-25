@@ -1,12 +1,12 @@
 from django.db import models
 from django.contrib.sites.models import Site
-from serializer import make_serializers
+from .serializer import make_serializers
 
 ENCODER, DECODER = make_serializers()
 
 class Configuration(models.Model):
     key = models.CharField(max_length=50)
-    site = models.ForeignKey(Site)
+    site = models.ForeignKey(Site, on_delete=models.CASCADE)
     _data = models.TextField(db_column='data')
     
     def get_data(self):
@@ -27,8 +27,9 @@ class Configuration(models.Model):
         except KeyError:
             return self.key
 
-    def __unicode__(self):
+    def __str__(self):
         return '%s: %s' % (self.key, self.site)
 
     class Meta:
         unique_together = [('key', 'site')]
+        app_label = 'configstore-configuration'

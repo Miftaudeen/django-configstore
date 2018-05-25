@@ -1,6 +1,6 @@
 from django.contrib.sites.models import Site
 
-from models import Configuration
+from .models import Configuration
 
 import threading
 
