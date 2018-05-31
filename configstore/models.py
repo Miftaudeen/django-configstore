@@ -32,4 +32,4 @@ class Configuration(models.Model):
 
     class Meta:
         unique_together = [('key', 'site')]
-        app_label = 'configstore-configuration'
+        app_label = 'configstore'
